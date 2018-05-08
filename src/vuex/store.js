@@ -35,9 +35,9 @@ export default new Vuex.Store({
         .catch(error => console.log(error))
     },
 
-    downloadFile (fileId) {
+    downloadFile ({commit}, fileId) {
       return Case.downloadFile(fileId)
-        .then(response => console.log(response))
+        .then(response => window.open(response.config.url, '_blank'))
         .catch(error => console.log(error))
     }
   },

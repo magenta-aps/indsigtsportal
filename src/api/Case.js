@@ -4,8 +4,7 @@ import axios from 'axios'
  * Defines the base url and headers for http calls
  */
 const HTTP = axios.create({
-  baseURL: 'http://localhost:8081',
-  // baseURL: '/api',
+  baseURL: 'http://dokportal.ballerup.dk/api',
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
     'Access-Control-Allow-Origin': '*',
@@ -14,8 +13,6 @@ const HTTP = axios.create({
   }
 })
 
-// const dummyData = require('../static/data.json')
-
 export default {
 
   /**
@@ -23,11 +20,8 @@ export default {
    * @returns {Array}
    */
   getAll () {
-    // return HTTP.get(`/cases/`)
-    return HTTP.get(`/static/data.json`)
+    return HTTP.get(`/cases`)
       .then(response => {
-        // return response
-        console.log(response.data)
         return response.data
       })
   },
@@ -38,10 +32,9 @@ export default {
    * @returns {Object}
    */
   get (caseId) {
-    // return HTTP.get(`/cases/${caseId}`)
-    return HTTP.get(`/static/data.json`)
+    return HTTP.get(`/cases/${caseId}`)
       .then(response => {
-        return response.data[0]
+        return response.data
       })
   },
 
@@ -50,7 +43,7 @@ export default {
    * @param {String} fileId - The file to download
    * @returns {*}
    */
-  download (fileId) {
+  downloadFile (fileId) {
     return HTTP.get(`/downloads/${fileId}`)
       .then(response => {
         return response

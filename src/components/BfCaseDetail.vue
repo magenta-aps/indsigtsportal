@@ -9,7 +9,7 @@
     <ul class="link-list">
       <li v-for="(f, index) in currentCase.Files" :key="index">
         <button @click="$store.dispatch('downloadFile', f.FileId)">
-          {{f.Title}}
+          {{f.FileName}}
         </button>
       </li>
     </ul>
@@ -58,7 +58,7 @@ export default {
 button {
      background:none!important;
      color:#006b9a;
-     border:none; 
+     border:none;
      padding:0!important;
      margin-bottom: 10px;
      font: inherit;
