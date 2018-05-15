@@ -8,7 +8,7 @@
     <h2>Dokumenter</h2>
     <ul class="link-list">
       <li v-for="(f, index) in currentCase.Files" :key="index">
-        <button @click="$store.dispatch('downloadFile', f.FileId)">
+        <button @click="$store.dispatch('case/downloadFile', f.FileId)">
           {{f.FileName}}
         </button>
       </li>
@@ -25,16 +25,16 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentCase: 'getCurrentCase'
+      currentCase: 'case/getCurrentCase'
     })
   },
   watch: {
     currentCase (val) {
-      if (val == null) this.$store.dispatch('get', this.$route.params.caseId)
+      if (val == null) this.$store.dispatch('case/get', this.$route.params.caseId)
     }
   },
   mounted () {
-    if (this.currentCase == null) this.$store.dispatch('get', this.$route.params.caseId)
+    if (this.currentCase == null) this.$store.dispatch('case/get', this.$route.params.caseId)
   }
 }
 </script>

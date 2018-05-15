@@ -25,11 +25,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      cases: 'getCases'
+      cases: 'case/getCases'
     })
   },
   mounted () {
-    this.$store.dispatch('getAll')
+    this.$store.dispatch('case/getAll')
   },
   methods: {
   }
