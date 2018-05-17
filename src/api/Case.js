@@ -1,17 +1,19 @@
-import axios from 'axios'
+// import axios from 'axios'
+import { HTTP } from './Http'
 
 /**
  * Defines the base url and headers for http calls
  */
-const HTTP = axios.create({
-  baseURL: 'http://dokportal.ballerup.dk/api',
-  headers: {
-    'X-Requested-With': 'XMLHttpRequest',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-    'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT'
-  }
-})
+// const HTTP = axios.create({
+//   // baseURL: 'http://dokportal.ballerup.dk/api',
+//   baseURL: 'http://backend.magenta.dk:5000/api',
+//   headers: {
+//     'X-Requested-With': 'XMLHttpRequest',
+//     'Access-Control-Allow-Origin': '*',
+//     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+//     'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT'
+//   }
+// })
 
 export default {
 
@@ -20,10 +22,12 @@ export default {
    * @returns {Array}
    */
   getAll () {
-    return HTTP.get(`/cases`)
+    console.log('get all')
+    return HTTP.get(`/cases`, {headers: {'Authorization': 'some value'}})
       .then(response => {
         return response.data
       })
+      .catch(error => console.log(error))
   },
 
   /**
@@ -36,6 +40,7 @@ export default {
       .then(response => {
         return response.data
       })
+      .catch(error => console.log(error))
   },
 
   /**
@@ -48,5 +53,6 @@ export default {
       .then(response => {
         return response
       })
+      .catch(error => console.log(error))
   }
 }
