@@ -1,19 +1,5 @@
-// import axios from 'axios'
 import { HTTP } from './Http'
-
-/**
- * Defines the base url and headers for http calls
- */
-// const HTTP = axios.create({
-//   // baseURL: 'http://dokportal.ballerup.dk/api',
-//   baseURL: 'http://backend.magenta.dk:5000/api',
-//   headers: {
-//     'X-Requested-With': 'XMLHttpRequest',
-//     'Access-Control-Allow-Origin': '*',
-//     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-//     'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT'
-//   }
-// })
+import store from '@/vuex/store'
 
 export default {
 
@@ -23,7 +9,7 @@ export default {
    */
   getAll () {
     console.log('get all')
-    return HTTP.get(`/cases`, {headers: {'Authorization': 'some value'}})
+    return HTTP.get(`/cases`, {headers: {'Authorization': 'Bearer ' + store.getters.accessToken}})
       .then(response => {
         return response.data
       })
@@ -36,7 +22,7 @@ export default {
    * @returns {Object}
    */
   get (caseId) {
-    return HTTP.get(`/cases/${caseId}`)
+    return HTTP.get(`/cases/${caseId}`, {headers: {'Authorization': 'Bearer ' + store.getters.accessToken}})
       .then(response => {
         return response.data
       })
@@ -49,7 +35,7 @@ export default {
    * @returns {*}
    */
   downloadFile (fileId) {
-    return HTTP.get(`/downloads/${fileId}`)
+    return HTTP.get(`/downloads/${fileId}`, {headers: {'Authorization': 'Bearer ' + store.getters.accessToken}})
       .then(response => {
         return response
       })

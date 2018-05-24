@@ -1,4 +1,5 @@
 import { AUTH_LOGOUT } from '../actions/auth'
+import router from '@/router'
 
 const state = {
   accessToken: localStorage.getItem('access_token') || ''
@@ -15,13 +16,13 @@ const actions = {
     if (token == null) return
     console.log('token is set as ' + token)
     localStorage.setItem('access_token', token)
-    // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
   },
 
   [AUTH_LOGOUT]: ({commit, dispatch}) => {
     return new Promise((resolve, reject) => {
       commit(AUTH_LOGOUT)
       localStorage.removeItem('access_token')
+      router.push('')
       resolve()
     })
   }
