@@ -7,7 +7,7 @@
             <div id="secondary-nav">
               <ul class="secondary-nav__items">
                 <li class="secondary-nav__item">
-                  <a href="#">Log ud</a>
+                  <span @click="logout">Log ud</span>
                   </li>
                 </ul>
             </div>
@@ -21,8 +21,15 @@
 </template>
 
 <script>
+import { AUTH_LOGOUT } from '@/vuex/actions/auth'
+
 export default {
-  name: 'BfHeader'
+  name: 'BfHeader',
+  methods: {
+    logout: function () {
+      this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push(''), this.$router.go())
+    }
+  }
 }
 </script>
 
@@ -70,10 +77,11 @@ header {
     margin-left: 26px;
 }
 
-.secondary-nav__item a {
+.secondary-nav__item span {
     font-size: 12px;
     font-weight: bold;
     color: #243544;
-    text-decoration: none
+    text-decoration: none;
+    cursor: pointer;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="col-4">
     <router-link
-      @click.native="$store.commit('setCurrentCase', value)"
+      @click.native="$store.commit('case/setCurrentCase', value)"
       :to="{name: 'CaseDetail', params: {caseId: value.CaseId}}"
       target="_blank"
     >
