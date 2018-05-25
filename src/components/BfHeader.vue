@@ -27,7 +27,7 @@ export default {
   name: 'BfHeader',
   methods: {
     logout: function () {
-      this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push('/'))
+      this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push(''), this.$router.go())
     }
   }
 }

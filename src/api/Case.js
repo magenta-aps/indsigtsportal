@@ -8,7 +8,6 @@ export default {
    * @returns {Array}
    */
   getAll () {
-    console.log('get all')
     return HTTP.get(`/cases`, {headers: {'Authorization': 'Bearer ' + store.getters.accessToken}})
       .then(response => {
         return response.data

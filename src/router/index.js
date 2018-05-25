@@ -12,8 +12,6 @@ const ifAuthenticated = (to, from, next) => {
   var accessToken = dummyUrl.searchParams.get('access_token')
   store.dispatch('setAccessToken', accessToken)
 
-  console.log(`is authenticated: ${store.getters.isAuthenticated}`)
-
   if (store.getters.isAuthenticated) {
     next()
     return
