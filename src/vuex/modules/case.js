@@ -32,9 +32,9 @@ const actions = {
       .catch(error => console.log(error))
   },
 
-  downloadFile ({commit}, fileId) {
-    return Case.downloadFile(fileId)
-      .then(response => window.open(response.config.url, '_blank'))
+  downloadFile ({commit}, file) {
+    return Case.downloadFile(file)
+      .then(response => window.open(response.config.url))
       .catch(error => console.log(error))
   }
 }
