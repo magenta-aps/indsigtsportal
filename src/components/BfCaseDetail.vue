@@ -1,5 +1,8 @@
 <template>
   <div v-if="currentCase" class="container">
+    <router-link :to="{name: 'CaseList'}" class="btn">
+      <span class="chevron">&#x2039;</span> Tilbage
+    </router-link>
     <h1>{{currentCase.CaseId}}</h1>
     <div class="alert alert-danger">
       Dokumenterne fjernes efter den {{$moment(currentCase.Expires).format('DD-MM-YYYY')}}. Husk at hente filerne til dit eget arkiv inden denne dato.
@@ -8,9 +11,10 @@
     <h2>Dokumenter</h2>
     <ul class="link-list">
       <li v-for="(f, index) in currentCase.Files" :key="index">
-        <button @click="$store.dispatch('case/downloadFile', f.FileId)">
+        <button @click="$store.dispatch('case/downloadFile', f)">
           {{f.FileName}}
         </button>
+        (Tilføjet {{$moment(f.Created).format('DD-MM-YYYY')}})
       </li>
     </ul>
   </div>
@@ -53,6 +57,38 @@ export default {
   font-weight: bold;
   background-color: #f8d7da;
   border-color: #f5c6cb;
+}
+
+.btn {
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  color: #006b9a;
+}
+
+.chevron {
+  display: inline-block;
+  background-color: #333;
+  color: white;
+  vertical-align: middle;
+  text-align: center;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  margin-bottom: 2px;
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  margin-top: 10px
 }
 
 button {

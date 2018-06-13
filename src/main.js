@@ -6,10 +6,16 @@ import router from './router'
 import store from './vuex/store'
 import moment from 'moment'
 import VueMomentJS from 'vue-momentjs'
+import { HTTP } from '@/api/Http'
 
 Vue.use(VueMomentJS, moment)
 
 Vue.config.productionTip = false
+
+const token = localStorage.getItem('access_token')
+if (token) {
+  HTTP.defaults.headers.common['Authorization'] = 'Bearer ' + token
+}
 
 /* eslint-disable no-new */
 new Vue({

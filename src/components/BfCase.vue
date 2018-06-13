@@ -3,7 +3,6 @@
     <router-link
       @click.native="$store.commit('case/setCurrentCase', value)"
       :to="{name: 'CaseDetail', params: {caseId: value.CaseId}}"
-      target="_blank"
     >
       <div class="bf-case">
           <span class="bf-case-title">{{value.CaseId}} <span class="chevron">›</span></span>

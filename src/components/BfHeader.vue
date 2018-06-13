@@ -5,7 +5,10 @@
           <div class="col-12">
             <div class="logo"/>
             <div id="secondary-nav">
-              <ul class="secondary-nav__items">
+              <ul class="secondary-nav__items" v-if="isAuthenticated">
+                <li class="secondary-nav__item">
+                  {{name}}
+                </li>
                 <li class="secondary-nav__item">
                   <span @click="logout">Log ud</span>
                   </li>
@@ -22,9 +25,16 @@
 
 <script>
 import { AUTH_LOGOUT } from '@/vuex/actions/auth'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'BfHeader',
+  computed: {
+    ...mapGetters({
+      isAuthenticated: 'isAuthenticated',
+      name: 'name'
+    })
+  },
   methods: {
     logout: function () {
       this.$store.dispatch(AUTH_LOGOUT).then(() => this.$router.push(''), this.$router.go())

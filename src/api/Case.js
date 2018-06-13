@@ -1,5 +1,4 @@
 import { HTTP } from './Http'
-import store from '@/vuex/store'
 
 export default {
 
@@ -8,7 +7,7 @@ export default {
    * @returns {Array}
    */
   getAll () {
-    return HTTP.get(`/cases`, {headers: {'Authorization': 'Bearer ' + store.getters.accessToken}})
+    return HTTP.get(`/cases`)
       .then(response => {
         return response.data
       })
@@ -21,7 +20,7 @@ export default {
    * @returns {Object}
    */
   get (caseId) {
-    return HTTP.get(`/cases/${caseId}`, {headers: {'Authorization': 'Bearer ' + store.getters.accessToken}})
+    return HTTP.get(`/cases/${caseId}`)
       .then(response => {
         return response.data
       })
@@ -33,10 +32,15 @@ export default {
    * @param {String} fileId - The file to download
    * @returns {*}
    */
-  downloadFile (fileId) {
-    return HTTP.get(`/downloads/${fileId}`, {headers: {'Authorization': 'Bearer ' + store.getters.accessToken}})
+  downloadFile (file) {
+    return HTTP.get(`/downloads/${file.FileId}`, {'responseType': 'blob'})
       .then(response => {
-        return response
+        const url = window.URL.createObjectURL(new Blob([response.data]))
+        const link = document.createElement('a')
+        link.href = url
+        link.setAttribute('download', file.FileName)
+        document.body.appendChild(link)
+        link.click()
       })
       .catch(error => console.log(error))
   }
