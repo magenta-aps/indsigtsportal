@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      status: 'status',
+      status: 'status'
     })
   },
   methods: {
