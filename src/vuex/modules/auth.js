@@ -2,8 +2,8 @@ import { AUTH_LOGOUT, AUTH_REQUEST, AUTH_SUCCESS, AUTH_ERROR } from '../actions/
 import { HTTP } from '@/api/Http'
 
 const state = {
-  accessToken: localStorage.getItem('access_token') || '',
-  name: localStorage.getItem('name') || '',
+  accessToken: sessionStorage.getItem('access_token') || '',
+  name: sessionStorage.getItem('name') || '',
   status: ''
 }
 
@@ -31,14 +31,14 @@ const mutations = {
 const actions = {
   setAccessToken (state, token) {
     if (token == null) return
-    localStorage.setItem('access_token', token)
+    sessionStorage.setItem('access_token', token)
   },
 
   getName ({state, commit}) {
     return new Promise((resolve, reject) => {
       HTTP.get('/account/GetName')
         .then(response => {
-          localStorage.setItem('name', response.data.name)
+          sessionStorage.setItem('name', response.data.name)
           commit('name', response.data.name)
           resolve(response)
         })
@@ -50,7 +50,7 @@ const actions = {
       HTTP.post('/account', user)
         .then(resp => {
           const token = resp.data.token
-          localStorage.setItem('access_token', token)
+          sessionStorage.setItem('access_token', token)
           HTTP.defaults.headers.common['Authorization'] = `Bearer ${token}`
           commit(AUTH_SUCCESS, token)
           dispatch('getName')
@@ -59,7 +59,7 @@ const actions = {
         .catch(err => {
           console.log(err)
           commit(AUTH_ERROR)
-          localStorage.removeItem(AUTH_REQUEST)
+          sessionStorage.removeItem(AUTH_REQUEST)
           reject(err)
         })
     })
@@ -68,8 +68,8 @@ const actions = {
   [AUTH_LOGOUT]: ({commit, dispatch}) => {
     return new Promise((resolve, reject) => {
       commit(AUTH_LOGOUT)
-      localStorage.removeItem('access_token')
-      localStorage.removeItem('name')
+      sessionStorage.removeItem('access_token')
+      sessionStorage.removeItem('name')
       resolve()
     })
   }

@@ -14,7 +14,7 @@ Vue.use(VueMomentJS, moment)
 
 Vue.config.productionTip = false
 
-const token = localStorage.getItem('access_token')
+const token = sessionStorage.getItem('access_token')
 if (token) {
   HTTP.defaults.headers.common['Authorization'] = 'Bearer ' + token
 }
