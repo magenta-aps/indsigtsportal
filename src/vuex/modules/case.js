@@ -34,7 +34,7 @@ const actions = {
 
   downloadFile ({commit}, file) {
     return Case.downloadFile(file)
-      .then(response => window.open(response.config.url))
+      .then(null)
       .catch(error => console.log(error))
   }
 }
